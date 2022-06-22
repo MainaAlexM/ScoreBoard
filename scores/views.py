@@ -102,3 +102,12 @@ def project_search(request):
         message = "Enter a Search Term to Proceed"
         return render(request, 'search_results.html', {"message": message})
 
+
+@api_view(['GET','POST'])
+def project_list(request):
+    if request.method=='GET':
+        projects=Project.objects.all()
+        serializer=ProjectSerializer(projects,many=True)
+        return Response(serializer.data)
+
+
