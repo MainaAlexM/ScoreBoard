@@ -149,3 +149,13 @@ def rate_project(request, id):
         return render(request, "details.html", {"danger": "Error. Please Reload Your Page and Try again", "project": project})
 
 
+
+
+
+# 
+# 
+def logout_request(request):
+    logout(request)
+    return redirect('home')
+
+
