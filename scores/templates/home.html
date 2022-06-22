@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="row mt-4">
+    {% for project in projects %}
+    <div class="col-md-12 col-lg-3">
+
+        <div class="card mb-4 post-card">
+
+            <div class="card-title text-center">
+                <a href="{% url 'details' project.id %}">
+                    <h6 class="fade-item mb-2"> Project Name: {{ project.title }}</h6>
+                </a>
+            </div>
+
+            <a href="{%url 'details' project.id%}">
+                <img src="{{project.landing_page.url}}" class="img-fluid" alt="">
+            </a>
+            
+            <div class="card-body">
+                
+                    <div class="d-flex justify-content-between mt-2">
+                        <div class="d-flex justify-content-start">
+                            <div>
+                                <p class="text-muted"> Authored By: {{project.owner.username}}</p>
+                            </div>
+                        </div>
+                        <div class="display-on-hover">
+                            <a href="{% url 'details' project.id %}" class="btn btn-custome"><small>Rate Project </small></a>
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock content %}
