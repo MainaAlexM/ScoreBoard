@@ -45,3 +45,9 @@ def login_request(request):
     return render(request, 'auth/login.html', context=context)
 
 
+def home(request):
+    projects=Project.objects.all()
+    user_view = request.user
+
+    return render(request,'home.html',context={"projects":projects,"user_view":user_view})
+
