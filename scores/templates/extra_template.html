@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ScoreBoard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %} ">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+</style>
+</head>
+<body class="light-grey content" style="max-width:1600px">
+
+<!-- Sidebar/menu -->
+<nav class="sidebar collapse white animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+<div class="container">
+    <a href="#" onclick="w3_close()" class="hide-large right jumbo padding hover-grey" title="close menu">
+    <i class="fa fa-remove"></i>
+    </a>
+    <img src="/w3images/avatar_g2.jpg" style="width:45%;" class="round"><br><br>
+    <h4><b>PORTFOLIO</b></h4>
+    <p class="text-grey">Template by W3.CSS</p>
+</div>
+<div class="bar-block">
+    <a href="#portfolio" onclick="w3_close()" class="bar-item button padding text-teal"><i class="fa fa-th-large fa-fw margin-right"></i>PORTFOLIO</a> 
+    <a href="#about" onclick="w3_close()" class="bar-item button padding"><i class="fa fa-user fa-fw margin-right"></i>ABOUT</a> 
+    <a href="#contact" onclick="w3_close()" class="bar-item button padding"><i class="fa fa-envelope fa-fw margin-right"></i>CONTACT</a>
+</div>
+<!-- <div class="panel large">
+    <i class="fa fa-facebook-official alex-hover-opacity"></i>
+    <i class="fa fa-instagram alex-hover-opacity"></i>
+    <i class="fa fa-snapchat alex-hover-opacity"></i>
+    <i class="fa fa-pinterest-p alex-hover-opacity"></i>
+    <i class="fa fa-twitter alex-hover-opacity"></i>
+    <i class="fa fa-linkedin alex-hover-opacity"></i>
+</div> -->
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="overlay hide-large animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="main" style="margin-left:300px">
+
+<!-- Header -->
+<header id="portfolio">
+    <a href="#"><img src="/w3images/avatar_g2.jpg" style="width:65px;" class="circle right margin hide-large alex-hover-opacity"></a>
+    <span class="button hide-large xxlarge hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <div class="container">
+    <h1><b>My Portfolio</b></h1>
+    <div class="section bottombar padding-16">
+    <span class="margin-right">Filter:</span> 
+    <button class="button black">ALL</button>
+    <button class="button white"><i class="fa fa-diamond margin-right"></i>Design</button>
+    <button class="button white hide-small"><i class="fa fa-photo margin-right"></i>Photos</button>
+    <button class="button white hide-small"><i class="fa fa-map-pin margin-right"></i>Art</button>
+    </div>
+    </div>
+</header>
+
+<div class="container padding-large" style="margin-bottom:32px">
+    <h4><b>About Score Board</b></h4>
+    <p>A software testing and Rating website. Here developers post their Website Projects for other developers and/ or viewers to rate them. the ratings are based on the user experience navigating through the sites. The rates are scales of the site's Design, Usability, and Content.</p>
+    <hr>
+    
+    <h4>Posted Sites</h4>
+
+
+    <!-- Progress / Posted sites -->
+    <div class="posted">
+        120 Sites have been posted on this site for Rating!
+    </div>
+
+<!-- First Photo Grid-->
+{% for site in sites %}
+<div class="row-padding">
+    <div class="third container margin-bottom">
+        <img src="/w3images/mountains.jpg" alt="Norway" style="width:100%" class="alex-hover-opacity">
+        <div class="container white">
+            <p><b>Lorem Ipsum</b></p>
+            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+<!-- Images of Me -->
+<div class="row-padding padding-16" id="about">
+    <div class="col m6">
+    <img src="/w3images/avatar_g.jpg" alt="Me" style="width:100%">
+    </div>
+    <div class="col m6">
+    <img src="/w3images/me2.jpg" alt="Me" style="width:100%">
+    </div>
+</div>
+
+<!-- Contact section -->
+<div class="container light-grey padding-32 padding-large" id="contact">
+    <div class="content" style="max-width:600px">
+        <h4 class="center"><b>Contact Me</b></h4>
+        <p>Do you need a website or consultation?</p>
+        <form action="/action_page.php" target="_blank">
+            <div class="section">
+                <label>Name</label>
+                <input class="input border" type="text" name="Name" required>
+            </div>
+            <div class="section">
+                <label>Email</label>
+                <input class="input border" type="text" name="Email" required>
+            </div>
+            <div class="section">
+                <label>Message</label>
+                <input class="input border" type="text" name="Message" required>
+            </div>
+            <button type="submit" class="button block black margin-bottom">Send Message</button>
+        </form>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="container padding-32 dark-grey">
+<div class="row-padding">
+    <div class="third">
+    <h3>FOOTER</h3>
+    <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+    <p>Created by <a href="https://github.com/Mathenge-Alex" title="Alex_Mathenge Github" target="_blank" class="alex-hover-opacity">Alex Mathenge</a></p>
+    </div>
+</div>
+</footer>
+
+<div class="black center padding-24">Created by <a href="https://github.com/Mathenge-Alex" title="Alex_Mathenge Github" target="_blank" class="alex-hover-opacity">Alex Mathenge</a></div>
+
+<!-- End page content -->
+</div>
+
+
+
+</body>
+</html>
