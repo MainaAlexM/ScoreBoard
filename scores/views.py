@@ -78,3 +78,12 @@ def submit_request(request):
     return render(request, 'submit.html',context=context)
 
 
+@login_required
+def project_detail(request,id):
+    projects=Project.objects.get(id=id)
+    user_view = request.user
+
+    reviews = Ratings.objects.filter(project=projects)
+    print(projects.title)
+    return render(request, 'details.html',context={"projects":projects,'ratings':reviews,'user_view':user_view} )
+
