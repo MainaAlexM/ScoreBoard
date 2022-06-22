@@ -158,4 +158,16 @@ def logout_request(request):
     logout(request)
     return redirect('home')
 
+@login_required
+def profile(request):
+    user_view=request.user
+    current_user = request.user
+    posts=Project.objects.filter(owner=current_user)
+    context = {
+    "user_info": current_user,
+    "user_view": user_view,
+    "posts": posts,
+    'number': len(Project.objects.all().filter(owner=request.user.id)),
+    }
+    return render(request,'profile.html', context=context)
 
