@@ -1,0 +1,57 @@
+{% load static %}
+<nav class="navbar sticky-top d-flex justify-content-around">
+    <a class="navbar-brand mx-5" href="{%url 'home'%}">
+    <p class="d-inline-block logoText  text-larger">Score Board</p>
+    </a>
+
+    <div class="nav-item">
+        <a class="nav-link text-dark" href="{%url 'submit'%}">Upload Your Project</a>
+    </div> 
+
+    <nav class="navbar navbar-expand-md navbar-light">
+
+        <button class="navbar-toggler "  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"`
+            aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse " id="navbarNav">
+            
+
+            <ul class="navbar-nav mr-5 ">
+                <form action="{%url 'searchResults' %}" role="search" class="mx-5 my-1">
+                    <input class="form-control me-2 " type="search" placeholder="Search for projects" aria-label="Search" name="name">
+                </form>
+                
+
+                {% if user_info %}
+                <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="bit-img">
+                        {% if user_view.profiles.profile_image %}
+                        <img src="{{user_view.profiles.profile_image.url}}" alt="" class="img-resp">
+                        {% else %}
+                        <img src="{% static 'profile.png' %}"  alt="prof" class="img-resp">
+                        {% endif %}
+                    </div>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="{%url 'profile' %}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{%url 'logout' %}">Log out</a></li>
+                </ul>
+                </li>
+                
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{%url 'login' %}">Login</a>
+                </li> 
+                {% endif %}
+            
+            </ul>
+
+        </div>
+    
+    </nav>
+
+</nav>
