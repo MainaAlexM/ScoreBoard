@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <p class="h4 my-3">Rate Projects</p>
+    <div class="row">
+       {% for pro in searched %}
+       <div class="col-md-4">
+        <a href="{%url 'details' pro.id%}">
+            <img src="{{pro.landing_page.url}}" class="img-fluid" alt="">
+
+        </a>
+        <p class="h5 pro-title my-3 ">{{pro.title}}</p>
+            
+        </div>
+        {% empty %}
+        <p>No Project available</p>
+       {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
