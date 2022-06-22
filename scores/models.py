@@ -26,3 +26,33 @@ class Profile(models.Model):
     def delete_profile(cls, profile):
         cls.delete(profile)
 
+
+class Project(models.Model):
+    title = models.CharField(max_length=60, blank=False)
+    landing_page = CloudinaryField("landing_page")
+    site_url = models.URLField()
+    description = models.TextField()
+    owner = models.ForeignKey(
+        User, related_name="projects", null=True, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return self.title
+
+    @classmethod
+    def save_project(cls, project):
+        cls.save()
+
+    @classmethod
+    def delete_prject(cls, project_id):
+        cls.delete(id=project_id)
+
+    @classmethod
+    def update_project(cls, title):
+        cls.update(title=title)
+
+    @classmethod
+    def search_project(cls, title):
+        project = cls.objects.filter(title__icontains=title)
+        return project
+
+
