@@ -42,3 +42,19 @@ class UserTestClass(TestCase):
         user = User.objects.all()
         self.assertFalse(User.objects.filter(pk=self.new_user.id).exists())
 
+
+class RatingsTestCase(TestCase):
+
+    def setUp(self):
+        self.user=User(
+            username='prof',email='apptestermind@gmail.com',password='key_one'
+    )
+        self.image=Project(title='test_title',owner=self.user,landing_page='https://www.pexels.com/photo/portrait-of-beautiful-woman-posing-outdoors-12339648/200/300',description='Trial Message',site_url='https://pexels.com')
+
+        self.user.save()
+        self.image.save()
+    def test_instance(self):
+        self.project = Ratings(project = self.image,design = 5,usability=3,content=8,user=self.user)
+        self.assertTrue(isinstance(self.project,Ratings))
+
+
