@@ -171,3 +171,33 @@ def profile(request):
     }
     return render(request,'profile.html', context=context)
 
+
+@login_required
+def profile_edit(request):
+    user_view = request.user
+
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, request.FILES)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            bio = form.cleaned_data['bio']
+            profile_image = form.cleaned_data['profile_image']
+            profile = Profile.objects.get(id=request.user.id)
+            profile.profile_image = profile_image
+            profile.bio = bio
+            profile.save()
+            User.objects.filter(id=request.user.id).update(
+                email=email, username=username)
+            return redirect('profile')
+    current_user = request.user
+    user_profile = Profile.objects.all().filter(
+        user=current_user).first()
+    form = ProfileEditForm()
+    context = {
+        "user_info": user_view,
+        "form": form,
+        "user_view": user_view,
+        'number': len(Project.objects.all().filter(owner=request.user.id)),
+    }
+    return render(request, 'profile_edit.html', context=context)
