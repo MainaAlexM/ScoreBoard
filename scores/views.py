@@ -51,3 +51,30 @@ def home(request):
 
     return render(request,'home.html',context={"projects":projects,"user_view":user_view})
 
+
+@login_required
+def submit_request(request):
+    user_view = request.user
+
+    if request.method == "POST":
+        form = SubmitForm(request.POST, request.FILES)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            description =form.cleaned_data["description"]
+            site_url = form.cleaned_data["site_url"]
+            landing_page = form.cleaned_data["landing_page"]
+            new_project = Project(title=title, description=description,site_url=site_url)
+            new_project.landing_page = landing_page
+            new_project.owner = request.user
+            new_project.save()
+            messages.success(request,"Upload Successful!") 
+            return redirect('home')
+    
+    form = SubmitForm()
+    context = {
+        "form": form,
+        "user_view":user_view
+    }
+    return render(request, 'submit.html',context=context)
+
+
