@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="container px-2 row justify-content-center">
+        <div class="col-md-8">
+            <!-- Top Profile -->
+            <div class="py-5 mx-5 mb-2  d-flex justify-content-evenly align-items-start">
+                <!-- Profile Picture -->
+                
+                <div class="img-div mx-0">
+                    {% if user_view.profiles.profile_image %}
+                    
+                    <img src="{{user_view.profiles.profile_image.url}}" alt="" class="img-resp">
+                    {% else %}
+                    <img src="{% static 'profile.jpeg'%}"  alt="" class="img-resp">
+                    {% endif %}
+                </div>
+                <!-- Side Description -->
+                <div>
+                    <div class="d-flex align-items-center justify-content-start">
+                        <p class="h2 me-3">{{user_details}}</p>
+                        {% if request.path == '/profile' %}
+                        <a href="{%url 'profile_edit' %}">
+                            <div class="btn btn-outline btn-sm">Edit Profile</div>
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex my-3 align-items-center justify-content-between">
+                        <p class="lead me-3"><strong>
+                            {% if number %}
+                            {{number}}
+                            {% else %}
+                            0
+                            {% endif %}</strong> posts </p>
+                    
+                    </div>
+                    <div>
+                        <p class="lead">
+                            {% if user_details.bio %}
+                            {{user_details.bio}}
+                            {% else %}
+                            Bio is coming soon ...
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Below Profile -->
+            <div class="container border-top d-flex flex-column  align-items-center">
+                <p class="lead text-center">
+                    {% if request.path == '/profile' %}
+                    Posts
+                    {% else %}
+                    <a href="{%url 'profile_edit' %}" class="lead me-3 text-decoration-none text-dark">Posts </a>
+                    Edit Profile
+                    {% endif %}
+                </p>
+                {% block edit_display %}
+                <div class="container mt-1">
+                    <div class="row">
+                        {% for post in posts %}
+                        <div class="col-md-4">
+                            <div class="card" >
+                                <a href="{%url 'details' post.id%}">
+                                    <img class="card-img-top img-fluid img-responsive" src="{{post.landing_page.url}}" alt="Card image cap">
+                                </a>                            </div>
+                        </div>
+                    
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
