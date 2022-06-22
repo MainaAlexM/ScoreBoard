@@ -16,4 +16,10 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ProfileSerializer(serializers.ModelSerializer):
+    projects = serializers.StringRelatedField(many=True)
+    profiles = UserSerializer(read_only = True)
 
+    class Meta:
+        model=User
+        fields=['username', 'projects','profiles']
