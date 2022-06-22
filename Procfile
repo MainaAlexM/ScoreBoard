@@ -1,1 +1,1 @@
-web: gunicorn scoreboard.wsgi
+web: gunicorn ScoreBoard.wsgi
