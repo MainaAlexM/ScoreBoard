@@ -10,7 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-
+import os
+from pathlib import Path
+from decouple import config,Csv
+import dj_database_url
+import django_on_heroku
+import cloudinary
+import cloudinary.api
+import cloudinary.uploader
+import cloudinary, cloudinary.api,cloudinary.uploader
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -141,6 +149,11 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+cloudinary.config( 
+    cloud_name = config('cloud_name'), 
+    api_key = config('api_key'), 
+    api_secret = config('api_secret'),
+    secure = True
+)
 
 django_on_heroku.settings(locals())
