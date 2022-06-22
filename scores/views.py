@@ -111,3 +111,13 @@ def project_list(request):
         return Response(serializer.data)
 
 
+@api_view(['GET','POST'])
+def all_users(request):
+    if request.method =='GET':
+        users=User.objects.all()
+        serializer=ProfileSerializer(users, many=True)
+        return Response(serializer.data)
+
+
+
+
