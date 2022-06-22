@@ -23,3 +23,22 @@ class ProfileTestClass(TestCase):
         self.assertEquals(len(profiles),1)
 
 
+class UserTestClass(TestCase):
+    def setUp(self):
+        self.new_user=User(
+            username='testerd',email='apptestermind@gmail.com',password='key_one'
+        )
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_user,User))
+
+    def test_save_method(self):
+        self.new_user.save()
+        user=User.objects.all()
+        self.assertEquals(len(user),1)
+    
+    def test_delete_method(self):
+        self.new_user.save()
+        self.new_user.delete()
+        user = User.objects.all()
+        self.assertFalse(User.objects.filter(pk=self.new_user.id).exists())
+
