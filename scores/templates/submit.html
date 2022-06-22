@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+
+{% block content %}
+
+    <div class="d-flex justify-content-center ">
+        <form enctype="multipart/form-data"
+            class="submit-form p-4 border  rounded"
+            method="post">
+            {% csrf_token %}
+            <p class="h4 text-center">Add a New Project</p>
+            {{ form }}
+            <input class="btn btn-primary form-control signup mx-2 submit" type="submit">
+        </form>
+    </div>
+{% endblock content %}
