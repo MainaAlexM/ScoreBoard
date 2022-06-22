@@ -58,3 +58,31 @@ class RatingsTestCase(TestCase):
         self.assertTrue(isinstance(self.project,Ratings))
 
 
+class ImagePostTestClass(TestCase):
+    def setUp(self):
+        self.user=User(
+            username='testerd',email='apptestermind@gmail.com',password='key_one'
+    )
+        self.user.save()
+
+        self.image=Project(title='test_title',owner=self.user,landing_page='https://www.pexels.com/photo/portrait-of-beautiful-woman-posing-outdoors-12339648/200/300',description='Trial Message',site_url='https://pexels.com')
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.image,Project))
+
+    def test_save_profile(self):
+        self.image.save()
+        images = Project.objects.all()
+
+        self.assertEquals(len(images),1)
+
+    def test_delete_image(self):
+        def setUp(self):
+            self.user=User(
+                username='testerd',email='apptestermind@gmail.com',password='key_one')
+        self.user.save()
+        self.image=Project(id=1,title='test_title',owner=self.user,landing_page='https://www.pexels.com/photo/portrait-of-beautiful-woman-posing-outdoors-12339648/200/300',description='Trial Message',site_url='https://pexels.com')
+        self.image.delete()
+        images = Project.objects.all()
+
+        self.assertFalse(Project.objects.filter(pk=self.image.id).exists())
