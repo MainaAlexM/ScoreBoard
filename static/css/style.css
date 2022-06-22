@@ -1,6 +1,4 @@
-*{
-    text-decoration:none;
-}
+
 .cardy{
     height: 20rem;
 }
@@ -9,6 +7,10 @@ body{
     background-color: black;
     color: aqua;
 }
-.card-title{
-    text-decoration:none;
+.card-title a{
+    text-decoration: none;
+    color: black;
 }
+/* .cardy{
+    background-color: rgba(red, green, blue, 60%)
+} */
