@@ -119,5 +119,33 @@ def all_users(request):
         return Response(serializer.data)
 
 
+@login_required
+def rate_project(request, id):
+    if request.method == "POST":
+
+        project = Project.objects.get(id=id)
+        current_user = request.user
+
+        design_rate=request.POST["design"]
+        usability_rate=request.POST["usability"]
+        content_rate=request.POST["content"]
+
+        Ratings.objects.create(
+            project=project,
+            user=current_user,
+            design_rate=design_rate,
+            usability_rate=usability_rate,
+            content_rate=content_rate,
+            avg_rate=round((float(design_rate)+float(usability_rate)+float(content_rate))/3,2),
+        )
+        avg_rating= (int(design_rate)+int(usability_rate)+int(content_rate))/3
+
+        project.rate=avg_rating
+        project.update_project()
+
+        return render(request, "details.html", {"success": "Project Rated Successfully", "project": project, "rating": Ratings.objects.filter(project=project)})
+    else:
+        project = Project.objects.get(id=id)
+        return render(request, "details.html", {"danger": "Error. Please Reload Your Page and Try again", "project": project})
 
 
